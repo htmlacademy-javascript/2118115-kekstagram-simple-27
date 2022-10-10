@@ -7,13 +7,15 @@ function randomIntFromInterval(min, max) {
    if (min === max) {
     return min;
    }
-   return min > max ?
-    Math.floor(Math.random() * (min - max + 1) + max)
-    :
-      Math.floor(Math.random() * (max - min + 1) + min);
+} 
+
+function randomIntFromInterval2(min, max) {
+return min > max ?  Math.floor(Math.random() * (min - max + 1) + max)
+                 :  Math.floor(Math.random() * (max - min + 1) + min);
 }
-const rndInt = randomIntFromInterval(3,7);
-console.log(rndInt);
+
+randomIntFromInterval2(3,7);
+console.log(randomIntFromInterval2(3,7))
 
 function stringLength(inputtxt, maxlength) 
 {
@@ -22,11 +24,11 @@ function stringLength(inputtxt, maxlength)
       return false;
       }
       else
-      { 
-      return true;
-      }
+      return !(inputtxt.length > maxlength)
 }
-const inputtxt = 'dfdsfsdfsfsd';
-const maxlength = 20;
-const stringL = stringLength(inputtxt, maxlength);
-console.log(stringL);
+
+let inputtxt = 'Ура-ура!';
+let maxlength = 20;
+
+stringLength(inputtxt, maxlength);
+console.log(stringLength(inputtxt, maxlength));

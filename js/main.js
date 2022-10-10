@@ -10,8 +10,7 @@ function randomIntFromInterval(min, max) {
 } 
 
 function randomIntFromInterval2(min, max) {
-return min > max ?  Math.floor(Math.random() * (min - max + 1) + max)
-                 :  Math.floor(Math.random() * (max - min + 1) + min);
+    return (Math.round(Math.random() * (max - min)) + min);
 }
 
 randomIntFromInterval2(3,7);

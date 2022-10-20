@@ -20,14 +20,12 @@ function random(min, max) {
 }
 
 randomIntFromInterval(MIN_NUMBER, MAX_NUMBER);
-console.log(randomIntFromInterval(MIN_NUMBER, MAX_NUMBER));
 
 function stringLength(input, line) {
   return !(input.length > line);
 }
 
 stringLength(INPUT_TXT, MAX_LENGHT);
-console.log(stringLength(INPUT_TXT, MAX_LENGHT));
 
 const TRAVEL = [
   'beach',
@@ -70,14 +68,14 @@ function getPhotoUrl () {
 
 const getRandomArrayElement = (elements) => elements[randomIntFromInterval(0, elements.length - 1)];
 
-const createNewObject = () => {  
+const createNewObject = () => {
   return {
     id: getPhotoId(),
     url: `photos/${getPhotoUrl()}.jpg`,
     description: getRandomArrayElement(TRAVEL),
     likes: randomIntFromInterval(15,200),
     comments: randomIntFromInterval(0,200),
-  }
+  };
 };
 
 const createSimilarPhotoObjects = Array.from({length: 25}, createNewObject);

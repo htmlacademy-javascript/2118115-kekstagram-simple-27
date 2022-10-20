@@ -62,11 +62,11 @@ let lastGeneratedUrlId = 0;
 
 function getPhotoId () {
   return ++lastGeneratedPhotoId;
-}
+};
 
 function getPhotoUrl () {
   return ++lastGeneratedUrlId;
-}
+};
 
 const getRandomArrayElement = (elements) => elements[randomIntFromInterval(0, elements.length - 1)];
 
@@ -77,8 +77,8 @@ const createNewObject = () => {
     description: getRandomArrayElement(TRAVEL),
     likes: randomIntFromInterval(15,200),
     comments: randomIntFromInterval(0,200),
-  };
-}
+  }
+};
 
 const createSimilarPhotoObjects = Array.from({length: 25}, createNewObject);
 

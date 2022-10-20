@@ -76,6 +76,6 @@ const createNewObject = () => (
     likes: randomIntFromInterval(15,200),
     comments: randomIntFromInterval(0,200),
   }
-)  
+);
 
 const createSimilarPhotoObjects = Array.from({length: 25}, createNewObject);

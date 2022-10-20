@@ -68,16 +68,14 @@ function getPhotoUrl () {
 
 const getRandomArrayElement = (elements) => elements[randomIntFromInterval(0, elements.length - 1)];
 
-const createNewObject = () => {
-  return {
+const createNewObject = () => (
+  {
     id: getPhotoId(),
     url: `photos/${getPhotoUrl()}.jpg`,
     description: getRandomArrayElement(TRAVEL),
     likes: randomIntFromInterval(15,200),
     comments: randomIntFromInterval(0,200),
-  };
-};
+  }
+)  
 
 const createSimilarPhotoObjects = Array.from({length: 25}, createNewObject);
-
-console.log(createSimilarPhotoObjects);

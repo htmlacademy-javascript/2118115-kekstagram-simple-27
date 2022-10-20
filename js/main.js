@@ -1,5 +1,5 @@
 const MIN_NUMBER = 1;
-const MAX_NUMBER =25;
+const MAX_NUMBER = 25;
 const INPUT_TXT = 'Ура-ура!';
 const MAX_LENGHT = 20;
 
@@ -23,7 +23,7 @@ randomIntFromInterval(MIN_NUMBER, MAX_NUMBER);
 console.log(randomIntFromInterval(MIN_NUMBER, MAX_NUMBER));
 
 function stringLength(input, line) {
-  return !(input.length > line)
+  return !(input.length > line);
 }
 
 stringLength(INPUT_TXT, MAX_LENGHT);
@@ -68,19 +68,16 @@ function getPhotoUrl () {
   return ++lastGeneratedUrlId;
 }
 
-const createNewObject = () => {
-  let randomId = getPhotoId();
-  let randomUrlIndex = getPhotoUrl();
-  let randomDescriptionIndex = randomIntFromInterval(0, TRAVEL.length - 1);
-  let randomLikeIndex = randomIntFromInterval(15,200);
-  let randomCommentsIndex = randomIntFromInterval(0,200);
+const getRandomArrayElement = (elements) => elements[randomIntFromInterval(0, elements.length - 1)];
+
+const createNewObject = () => {  
   return {
-    id: randomId,
-    url: `photos/${randomUrlIndex}.jpg`,
-    description: TRAVEL[randomDescriptionIndex],
-    likes: randomLikeIndex,
-    comments: randomCommentsIndex,
-  }
+    id: getPhotoId(),
+    url: `photos/${getPhotoUrl()}.jpg`,
+    description: getRandomArrayElement(TRAVEL),
+    likes: randomIntFromInterval(15,200),
+    comments: randomIntFromInterval(0,200),
+  };
 }
 
 const createSimilarPhotoObjects = Array.from({length: 25}, createNewObject);

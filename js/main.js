@@ -57,21 +57,32 @@ const TRAVEL = [
   'bigCar',
 ];
 
+let lastGeneratedPhotoId = 0;
+let lastGeneratedUrlId = 0;
+
+function getPhotoId () {
+  return ++lastGeneratedPhotoId;
+}
+
+function getPhotoUrl () {
+  return ++lastGeneratedUrlId;
+}
+
 const createNewObject = () => {
-  const RANDOM_ID_INDEX = randomIntFromInterval(1,25);
-  const RANDOM_URL_INDEX = randomIntFromInterval(1,25);
-  const RANDOM_DESCRIPTION_INDEX = randomIntFromInterval(0, TRAVEL.length - 1);
-  const RANDOM_LIKES_INDEX = randomIntFromInterval(15,200);
-  const RANDOM_COMMENTS_INDEX = randomIntFromInterval(0,200);
+  let randomId = getPhotoId();
+  let randomUrlIndex = getPhotoUrl();
+  let randomDescriptionIndex = randomIntFromInterval(0, TRAVEL.length - 1);
+  let randomLikeIndex = randomIntFromInterval(15,200);
+  let randomCommentsIndex = randomIntFromInterval(0,200);
   return {
-    id: RANDOM_ID_INDEX,
-    url: 'photos/' + RANDOM_URL_INDEX + '.jpg',
-    description: TRAVEL[RANDOM_DESCRIPTION_INDEX],
-    likes: RANDOM_LIKES_INDEX,
-    comments: RANDOM_COMMENTS_INDEX,
+    id: randomId,
+    url: `photos/${randomUrlIndex}.jpg`,
+    description: TRAVEL[randomDescriptionIndex],
+    likes: randomLikeIndex,
+    comments: randomCommentsIndex,
   }
 }
 
-const SIMILAR_OBJECT = Array.from({length: 25}, createNewObject);
+const createSimilarPhotoObjects = Array.from({length: 25}, createNewObject);
 
-console.log(SIMILAR_OBJECT);
+console.log(createSimilarPhotoObjects);

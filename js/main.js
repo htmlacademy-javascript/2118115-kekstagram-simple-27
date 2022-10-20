@@ -60,11 +60,11 @@ let lastGeneratedUrlId = 0;
 
 function getPhotoId () {
   return ++lastGeneratedPhotoId;
-};
+}
 
 function getPhotoUrl () {
   return ++lastGeneratedUrlId;
-};
+}
 
 const getRandomArrayElement = (elements) => elements[randomIntFromInterval(0, elements.length - 1)];
 

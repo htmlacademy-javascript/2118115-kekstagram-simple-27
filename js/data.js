@@ -1,7 +1,11 @@
-import {getRandomArrayElement} from './util.js';
-import {randomIntFromInterval} from './util.js';
-import {getPhotoId} from './util.js';
-import {getPhotoUrl} from './util.js';
+import {getRandomArrayElement, randomIntFromInterval, getPhotoId, getPhotoUrl, stringLength} from './util.js';
+
+const MIN_NUMBER = 15;
+const MAX_NUMBER = 200;
+const INPUT_TXT = 'Ура-ура!';
+const MAX_LENGHT = 20;
+
+stringLength(INPUT_TXT, MAX_LENGHT);
 
 
 const TRAVEL = [
@@ -37,8 +41,8 @@ const createNewObject = () => (
     id: getPhotoId(),
     url: `photos/${getPhotoUrl()}.jpg`,
     description: getRandomArrayElement(TRAVEL),
-    likes: randomIntFromInterval(15,200),
-    comments: randomIntFromInterval(0,200),
+    likes: randomIntFromInterval(MIN_NUMBER,MAX_NUMBER),
+    comments: randomIntFromInterval(0,MAX_NUMBER),
   }
 );
 

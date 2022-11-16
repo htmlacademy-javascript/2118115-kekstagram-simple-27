@@ -31,10 +31,20 @@ function getPhotoUrl () {
 
 const getRandomArrayElement = (elements) => elements[randomIntFromInterval(0, elements.length - 1)];
 
+const isEscapeKey = (evt) => {
+  return evt.key === 'Escape';
+}; 
+
+const isEnterKey = (evt) => {
+  return evt.key === 'Enter';
+};
+
 export {
   getRandomArrayElement,
   randomIntFromInterval,
   getPhotoId,
   getPhotoUrl,
-  stringLength
+  stringLength,
+  isEscapeKey,
+  isEnterKey
 };

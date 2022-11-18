@@ -4,6 +4,7 @@ import {picturesForTemplateBlock} from './userphoto.js';
 
 import './user-modal.js';
 import './user-form.js';
+import './user-slider.js';
 
 
 createSimilarPhotoObjects();

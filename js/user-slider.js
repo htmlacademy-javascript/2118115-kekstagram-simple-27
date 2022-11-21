@@ -1,4 +1,4 @@
-import { imgUploadPreview, valueScaleInput, SCALE_CONTROL} from './user-modal.js';
+import { imgUploadPreview, valueScaleInput, SCALE_CONTROL_MAX} from './user-modal.js';
 import './user-modal.js'
 
 const sliderContainer = document.querySelector('.img-upload__effect-level');
@@ -84,7 +84,7 @@ const isOriginalEffect = () => {
 const resetFilterValues = () => {
   imgUploadPreview.removeAttribute('class');
   imgUploadPreview.removeAttribute('style');
-  valueScaleInput.setAttribute('value', `${SCALE_CONTROL.MAX}%`);
+  valueScaleInput.setAttribute('value', `${SCALE_CONTROL_MAX}%`);
 };
 
 const changeFilterEffect = (photo, nameFilter) => {

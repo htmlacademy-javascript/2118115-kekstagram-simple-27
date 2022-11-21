@@ -6,13 +6,8 @@ import { picturesForTemplateBlock } from './userphoto.js';
 import {resetFilterValues, isOriginalEffect} from './user-slider.js';
 
 
-const SCALE_CONTROL = {
-  MIN: 25,
-  MIDDLE: 50,
-  HIGH: 75,
-  MAX: 100,
-  STEP: 25,
-};
+const SCALE_CONTROL_MAX = 100
+const SCALE_STEP = 25;
 
 const userModalElement = document.querySelector('.img-upload__overlay')
 const userModalOpenElement = document.querySelector('#upload-file')
@@ -23,36 +18,31 @@ const btnBiggerScale = document.querySelector('.scale__control--bigger');
 const valueScaleInput = document.querySelector('.scale__control--value');
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
-const setScale = (value) => {
-  if (value === SCALE_CONTROL.MIN) {
-    imgUploadPreview.style.transform = 'scale(0.25)';
-  } else if (value === SCALE_CONTROL.MIDDLE) {
-    imgUploadPreview.style.transform = 'scale(0.50)';
-  } else if (value === SCALE_CONTROL.HIGH) {
-    imgUploadPreview.style.transform = 'scale(0.75)';
-  } else if (value === SCALE_CONTROL.MAX){
-    imgUploadPreview.style.transform = 'scale(1)';
-  }
+const scaleValue = document.querySelector('.scale__control--value');
+const imageContainer = document.querySelector('.img-upload__preview');
+const imageCore = imageContainer.querySelector('img');
+
+
+
+
+const setScale = (scale) => {
+  scaleValue.value = `${scale}%`;
+  imageCore.style.transform = `scale(${scale / 100})`;
 };
 
-const onBtnSmallerScaleClick = () => {
-  const currentValue = Number(valueScaleInput.getAttribute('value').replace('%', ''));
-  let valueMin = '';
-  if (currentValue <= SCALE_CONTROL.MAX && currentValue > SCALE_CONTROL.MIN) {
-    valueMin = currentValue - SCALE_CONTROL.STEP;
-    valueScaleInput.setAttribute('value', `${valueMin}%`);
-    setScale(valueMin);
+btnBiggerScale.addEventListener('click', () => {
+  const scale = parseInt(scaleValue.value, 10);
+  if (scale < 100 && scale >= SCALE_STEP) {
+    setScale(scale + SCALE_STEP);
   }
-};
-const onBtnBiggerScaleClick = () => {
-  const currentValue = Number(valueScaleInput.getAttribute('value').replace('%', ''));
-  let valueMax = '';
-  if (currentValue >= SCALE_CONTROL.MIN && currentValue < SCALE_CONTROL.MAX) {
-    valueMax = currentValue + SCALE_CONTROL.STEP;
-    valueScaleInput.setAttribute('value', `${valueMax}%`);
-    setScale(valueMax);
+});
+
+btnSmallerScale.addEventListener('click', () => {
+  const scale = parseInt(scaleValue.value, 10);
+  if (scale <= SCALE_CONTROL_MAX && scale > SCALE_STEP) {
+    setScale(scale - SCALE_STEP);
   }
-};
+});
 
 const onPopupEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
@@ -65,11 +55,11 @@ function openUserModal () {
     userModalElement.classList.remove('hidden');
     document.querySelector('body').classList.add('modal-open');
     valueScaleInput.setAttribute('value', '100%');
-
+   
     isOriginalEffect();
     document.addEventListener('keydown', onPopupEscKeydown);
-    btnSmallerScale.addEventListener('click', onBtnSmallerScaleClick);
-    btnBiggerScale.addEventListener('click', onBtnBiggerScaleClick);
+    btnSmallerScale.addEventListener('click', btnSmallerScale);
+    btnBiggerScale.addEventListener('click', btnBiggerScale);
 };
 
 function closeUserModal () {
@@ -78,8 +68,8 @@ function closeUserModal () {
     resetFilterValues();
 
     document.removeEventListener('keydown', onPopupEscKeydown);
-    btnSmallerScale.removeEventListener('click', onBtnSmallerScaleClick);
-    btnBiggerScale.removeEventListener('click', onBtnBiggerScaleClick);
+    btnSmallerScale.removeEventListener('click', btnSmallerScale);
+    btnBiggerScale.removeEventListener('click', btnBiggerScale);
 };
 
 userModalOpenElement.addEventListener('click', () => {
@@ -99,4 +89,4 @@ userModalCloseElement.addEventListener('keydown', (evt) => {
     closeUserModal();
   });  
 
-  export {imgUploadPreview, valueScaleInput, SCALE_CONTROL};
+  export {imgUploadPreview, valueScaleInput, SCALE_CONTROL_MAX};

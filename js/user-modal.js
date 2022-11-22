@@ -111,13 +111,9 @@ function clearFormEditing () {
 }
 
 
-const pristine = new Pristine (userModalElement, {
-  classTo: 'img-upload__wrapper',
-  errorClass: 'img-upload__wrapper--invalid',
-  successClass: 'img-upload__wrapper--valid',
-  erpristinerorTextParent: 'img-upload__wrapper',
-  errorTextTag: 'span',
-  errorTextClass: 'img-upload__form--error'
+const pristine = new Pristine (imgUploadForm, {
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
 });
 
 function validateComment (value) {
@@ -151,19 +147,20 @@ const uploadImgAgain = () => {
 const setUserFormSubmit = (onSuccess, onFail) => {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
-    sendData(
-      () => {
-        onSuccess();
-        showPopupSuccess();
-      },
-      () => {
-        onFail();
-        showPopupError();
-        uploadImgAgain();
-      },
-      new FormData(evt.target),
-    );
+    if(pristine.validate()){
+      sendData(
+        () => {
+          onSuccess();
+          showPopupSuccess();
+        },
+        () => {
+          onFail();
+          showPopupError();
+          uploadImgAgain();
+        },
+        new FormData(evt.target),
+      );
+    }
   });
 };
 

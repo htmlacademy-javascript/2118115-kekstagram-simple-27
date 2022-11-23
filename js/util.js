@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 3000;
+
 function randomIntFromInterval(min, max) {
   if (min < 0 || max < 0) {
     return NaN;
@@ -54,8 +56,6 @@ const showAlert = () => {
   }, ALERT_SHOW_TIME);
 };
 
-
-
 export {
   getRandomArrayElement,
   randomIntFromInterval,
@@ -63,6 +63,5 @@ export {
   getPhotoUrl,
   stringLength,
   isEscapeKey,
-
   showAlert
 };

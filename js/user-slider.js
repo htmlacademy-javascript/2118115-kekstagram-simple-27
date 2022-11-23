@@ -1,6 +1,6 @@
 import { imgUploadPreview, scaleValue, SCALE_CONTROL_MAX} from './user-modal.js';
-import './user-modal.js'
-import './user-form.js'
+import './user-modal.js';
+import './user-form.js';
 
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');

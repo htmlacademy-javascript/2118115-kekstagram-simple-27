@@ -17,6 +17,3 @@ getData((photo) => {
 });
 
 setUserFormSubmit(closeUserModal, closeFormEditingImgError);
-
-
-

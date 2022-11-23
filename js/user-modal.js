@@ -8,7 +8,7 @@ import {sendData} from './server.js';
 
 import {showPopupSuccess, showPopupError} from './popup.js';
 
-const SCALE_CONTROL_MAX = 100
+const SCALE_CONTROL_MAX = 100;
 const SCALE_STEP = 25;
 
 const userModalOpenElement = document.querySelector('#upload-file');
@@ -26,9 +26,6 @@ const imgUploadForm = picturesForTemplateBlock.querySelector('.img-upload__form'
 const scaleValue = document.querySelector('.scale__control--value');
 const imageContainer = document.querySelector('.img-upload__preview');
 const imageCore = imageContainer.querySelector('img');
-
-
-
 
 const setScale = (scale) => {
   scaleValue.value = `${scale}%`;
@@ -62,18 +59,18 @@ const onPopupEscKeydown = (evt) => {
 };
 
 function openUserModal () {
-    userModalElement.classList.remove('hidden');
-    document.querySelector('body').classList.add('modal-open');
-    scaleValue.value = '100%';
-    elementEffectNone.checked = true;
-    createSlider();
-    isOriginalEffect();
+  userModalElement.classList.remove('hidden');
+  document.querySelector('body').classList.add('modal-open');
+  scaleValue.value = '100%';
+  elementEffectNone.checked = true;
+  createSlider();
+  isOriginalEffect();
 
-    document.addEventListener('keydown', onPopupEscKeydown);
-    btnSmallerScale.addEventListener('click', btnSmallerScale);
-    btnBiggerScale.addEventListener('click', btnBiggerScale);
-    userModalCloseElement.addEventListener('click', closeUserModal);
-};
+  document.addEventListener('keydown', onPopupEscKeydown);
+  btnSmallerScale.addEventListener('click', btnSmallerScale);
+  btnBiggerScale.addEventListener('click', btnBiggerScale);
+  userModalCloseElement.addEventListener('click', closeUserModal);
+}
 
 const removeEffect = () => {
   radioEffectsItems.forEach((effect) => {
@@ -164,12 +161,7 @@ const setUserFormSubmit = (onSuccess, onFail) => {
   });
 };
 
-
-
-
-
 /*
-
 function closeUserModal () {
     userModalElement.classList.add('hidden');
     document.querySelector('body').classList.remove('modal-open');
@@ -178,26 +170,19 @@ function closeUserModal () {
     btnSmallerScale.removeEventListener('click', btnSmallerScale);
     btnBiggerScale.removeEventListener('click', btnBiggerScale);
 };
-
 userModalOpenElement.addEventListener('click', () => {
     openUserModal();
 });
-
 userModalOpenElement.addEventListener('keydown', (evt) => {
     openUserModal();
   });
-  
-
     document.removeEventListener('keydown',
 userModalCloseElement.addEventListener('click', () => {
     closeUserModal();
   });
-
 userModalCloseElement.addEventListener('keydown', (evt) => {
     closeUserModal();
-  });  
+  });
 */
 
-
-
-  export {imgUploadPreview, userModalOpenElement, userModalElement, scaleValue, SCALE_CONTROL_MAX, setUserFormSubmit, closeUserModal, closeFormEditingImgError};
+export {imgUploadPreview, userModalOpenElement, userModalElement, scaleValue, SCALE_CONTROL_MAX, setUserFormSubmit, closeUserModal, closeFormEditingImgError};

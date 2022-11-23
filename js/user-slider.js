@@ -1,5 +1,6 @@
-import { imgUploadPreview, valueScaleInput, SCALE_CONTROL_MAX} from './user-modal.js';
+import { imgUploadPreview, scaleValue, SCALE_CONTROL_MAX} from './user-modal.js';
 import './user-modal.js'
+import './user-form.js'
 
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
@@ -84,7 +85,7 @@ const isOriginalEffect = () => {
 const resetFilterValues = () => {
   imgUploadPreview.removeAttribute('class');
   imgUploadPreview.removeAttribute('style');
-  valueScaleInput.setAttribute('value', `${SCALE_CONTROL_MAX}%`);
+  scaleValue.setAttribute('value', `${SCALE_CONTROL_MAX}%`);
 };
 
 const changeFilterEffect = (photo, nameFilter) => {
@@ -125,25 +126,26 @@ const onEffectsListClick = (evt) => {
 
 effectsList.addEventListener('change', onEffectsListClick);
 
-// Создаем слайдер
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 100,
-  },
-  start: 100,
-  connect: 'lower',
-  format: {
-    to: function (value) {
-      if (Number.isInteger(value)) {
-        return value.toFixed(0);
-      }
-      return value.toFixed(1);
+const createSlider = () => {
+  noUiSlider.create(sliderElement, {
+    range: {
+      min: 0,
+      max: 100,
     },
-    from: function (value) {
-      return parseFloat(value);
+    start: 100,
+    connect: 'lower',
+    format: {
+      to: function (value) {
+        if (Number.isInteger(value)) {
+          return value.toFixed(0);
+        }
+        return value.toFixed(1);
+      },
+      from: function (value) {
+        return parseFloat(value);
+      },
     },
-  },
-});
+  });
+};
 
-export {resetFilterValues, isOriginalEffect};
+export {resetFilterValues, isOriginalEffect, elementEffectNone, effectsList, sliderElement, createSlider};

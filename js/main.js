@@ -1,11 +1,22 @@
 import './util.js';
-import {createSimilarPhotoObjects} from './data.js';
-import {picturesForTemplateBlock} from './userphoto.js';
+import './data.js';
+import './userphoto.js';
 
 import './user-modal.js';
 import './user-form.js';
 import './user-slider.js';
 
+import './server.js';
+import './popup.js';
+import {getData} from './server.js';
+import {createPhoto} from './userphoto.js';
+import {setUserFormSubmit, closeUserModal, closeFormEditingImgError} from './user-modal.js';
 
-createSimilarPhotoObjects();
-picturesForTemplateBlock;
+getData((photo) => {
+  createPhoto(photo);
+});
+
+setUserFormSubmit(closeUserModal, closeFormEditingImgError);
+
+
+

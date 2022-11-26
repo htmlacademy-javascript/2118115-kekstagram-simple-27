@@ -1,11 +1,7 @@
-import './userphoto.js';
-//import './user-form.js';
 import { isEscapeKey } from './util.js';
-
-import { picturesForTemplateBlock } from './userphoto.js';
+import { picturesForTemplateBlock } from './user-photo.js';
 import {resetFilterValues, isOriginalEffect, sliderElement, elementEffectNone, createSlider} from './user-slider.js';
 import {sendData} from './server.js';
-
 import {showPopupSuccess, showPopupError} from './popup.js';
 
 const SCALE_CONTROL_MAX = 100;
@@ -26,6 +22,7 @@ const imgUploadForm = picturesForTemplateBlock.querySelector('.img-upload__form'
 const scaleValue = document.querySelector('.scale__control--value');
 const imageContainer = document.querySelector('.img-upload__preview');
 const imageCore = imageContainer.querySelector('img');
+const submitButton = userModalElement.querySelector('.img-upload__submit');
 
 const setScale = (scale) => {
   scaleValue.value = `${scale}%`;
@@ -65,13 +62,11 @@ function openUserModal () {
   elementEffectNone.checked = true;
   createSlider();
   isOriginalEffect();
-
   document.addEventListener('keydown', onPopupEscKeydown);
   btnSmallerScale.addEventListener('click', btnSmallerScale);
   btnBiggerScale.addEventListener('click', btnBiggerScale);
   userModalCloseElement.addEventListener('click', closeUserModal);
 }
-
 const removeEffect = () => {
   radioEffectsItems.forEach((effect) => {
     effect.removeAttribute('checked');
@@ -122,14 +117,26 @@ pristine.addValidator(
   validateComment,
   'От 20 до 140 символов'
 );
-
-
 inputDescription.addEventListener('input', validateComment);
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправка...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 
 const openFormEditingImgAgain = () => {
   userModalElement.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
-
+  scaleValue.value = '100%';
+  elementEffectNone.checked = true;
+  createSlider();
+  isOriginalEffect();
   document.addEventListener('keydown', onPopupEscKeydown);
   btnSmallerScale.addEventListener('click', btnSmallerScale);
   btnBiggerScale.addEventListener('click', btnBiggerScale);
@@ -141,18 +148,20 @@ const uploadImgAgain = () => {
   userModalOpenElement.addEventListener('change', openFormEditingImgAgain);
 };
 
-const setUserFormSubmit = (onSuccess, onFail) => {
+const setUserFormSubmit = (onSuccess) => {
   imgUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     if(pristine.validate()){
+      blockSubmitButton();
       sendData(
         () => {
           onSuccess();
           showPopupSuccess();
+          unblockSubmitButton();
         },
         () => {
-          onFail();
           showPopupError();
+          unblockSubmitButton();
           uploadImgAgain();
         },
         new FormData(evt.target),
@@ -160,6 +169,7 @@ const setUserFormSubmit = (onSuccess, onFail) => {
     }
   });
 };
+
 
 /*
 function closeUserModal () {

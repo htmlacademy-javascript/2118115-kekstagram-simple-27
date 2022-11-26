@@ -6,9 +6,9 @@ const picturesForTemplateBlock = document.querySelector('.pictures');
 const photosUsersFragment = document.createDocumentFragment();
 
 
-const createPhoto = (photo) => {
+const createPhotos = (photos) => {
 
-  photo.forEach(({url, likes, comments}) => {
+  photos.forEach(({url, likes, comments}) => {
     const pictureUserElement = randomUsersImageTemplate.cloneNode(true);
     pictureUserElement.querySelector('.picture__img').src = url;
     pictureUserElement.querySelector('.picture__likes').textContent = likes;
@@ -19,4 +19,4 @@ const createPhoto = (photo) => {
   picturesForTemplateBlock.appendChild(photosUsersFragment);
 };
 
-export {picturesForTemplateBlock, createPhoto};
+export {picturesForTemplateBlock, createPhotos};

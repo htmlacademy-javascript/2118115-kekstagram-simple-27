@@ -10,8 +10,8 @@ import {getData} from './server.js';
 import {createPhotos} from './user-photo.js';
 import {setUserFormSubmit, closeUserModal, closeFormEditingImgError} from './user-modal.js';
 
-getData((photo) => {
-  createPhotos(photo);
+getData((photos) => {
+  createPhotos(photos);
 });
 
 setUserFormSubmit(closeUserModal, closeFormEditingImgError);
